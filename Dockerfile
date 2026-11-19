@@ -13,7 +13,8 @@ RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN printf 'allowBuilds:\n  esbuild: true\n  eslint-plugin-n8n-nodes-base: true\n  unrs-resolver: true\n' > pnpm-workspace.yaml \
+    && pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
